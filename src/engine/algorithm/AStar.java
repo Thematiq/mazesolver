@@ -54,7 +54,6 @@ public class AStar implements Algorithm {
                 }
             }
         }
-        System.out.println("Current node: " + v.getN());
         return Graph.nodeToVector(v.getN(), this.g.maxX);
     }
 

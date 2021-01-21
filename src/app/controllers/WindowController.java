@@ -180,7 +180,7 @@ public class WindowController implements Initializable {
         this.solver.loadGraph(Graph.getFromHashMap(this.map, this.width, this.height));
         this.solver.initAlgorithm(this.kingPos, this.endPos);
 
-        this.solvingAnimation = new Timeline(new KeyFrame(Duration.millis(100), e -> this.nextStep()));
+        this.solvingAnimation = new Timeline(new KeyFrame(Duration.millis(50), e -> this.nextStep()));
         this.solvingAnimation.setCycleCount(Animation.INDEFINITE);
         this.solvingAnimation.play();
 
@@ -329,6 +329,7 @@ public class WindowController implements Initializable {
         this.algorithmCombo.setValue("BFS");
 
         this.generatorCombo.getItems().add("Prim");
+        this.generatorCombo.getItems().add("RDFS");
         this.generatorCombo.setValue("Prim");
 
         ToggleGroup tg = new ToggleGroup();

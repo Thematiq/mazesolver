@@ -2,10 +2,7 @@ package engine.generators;
 
 import engine.tools.Vector;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class MazeGenerators {
     public static List<Vector> getTaxiNeighbourhood(Vector v, int w, int h) {
@@ -52,6 +49,57 @@ public class MazeGenerators {
                 }
             }
         }
+        return map;
+    }
+
+    static List<Vector> getDFSNeighborhood(Vector v, int width, int height) {
+        List<Vector> ret = new ArrayList<>();
+        if (v.x+2 < width) {
+            ret.add(new Vector(v.x+2, v.y));
+        } if (v.y+2 < height) {
+            ret.add(new Vector(v.x, v.y+2));
+        } if (v.y-2 >= 0) {
+           ret.add(new Vector(v.x, v.y-2));
+        } if (v.x-2 >= 0) {
+            ret.add(new Vector(v.x-2, v.y));
+        }
+        return ret;
+    }
+
+    static Vector avg(Vector a, Vector b) {
+        return new Vector((int)(a.x + b.x) / 2, (int)(a.y + b.y) / 2);
+    }
+
+    public static boolean[][] rdfsGenerator(int width, int height, Vector start) {
+        Stack<Vector> dfsStack = new Stack<>();
+        List<Vector> internalList;
+        boolean[][] visited = new boolean[width][height];
+        boolean[][] map = new boolean[width][height];
+        for(int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+                map[x][y] = true;
+            }
+        }
+        Random r = new Random();
+
+        dfsStack.add(start);
+        map[start.x][start.y] = false;
+        visited[start.x][start.y] = true;
+
+        while(!dfsStack.isEmpty()) {
+            Vector current = dfsStack.pop();
+            internalList = getDFSNeighborhood(current, width, height);
+            Collections.shuffle(internalList);
+            for (Vector v : internalList) {
+                if(!visited[v.x][v.y]) {
+                    visited[v.x][v.y] = true;
+                    map[v.x][v.y] = false;
+                    map[avg(current, v).x][avg(current, v).y] = false;
+                    dfsStack.add(v);
+                }
+            }
+        }
+
         return map;
     }
 }

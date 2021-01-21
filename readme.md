@@ -29,6 +29,7 @@ After starting simulation will show every tick current path chosen by the algori
 You can generate a maze instead of drawing one using one of the following algorithms:
 
 - Prim generator
+- Random depth-first generator
 
 After the maze generation, end tile will be moved to a random spot, due to the generators limitations. You can change it afterwards to which one you want.
 
