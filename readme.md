@@ -40,5 +40,5 @@ After the maze generation, end tile will be moved to a random spot, due to the g
 - <img src="media/king.png" width=20/> - Current position [which is starting node for the solver],
 - <img src="media/blue_square.png" width=20/> - Ending node,
 - <img src="media/red_square.png" width=20/> - Wall node, which cannot be traversed,
-- <img src="media/yellow_square.png" width=20> - Node discovered by the, algorithm during path finding,
-- <img src="media/pink_path.png" width=20> - Pink chain visualizes current path found by the algorithm
+- <img src="media/yellow_square.png" width=20> - Node discovered by the algorithm during path finding,
+- <img src="media/pink_path.png" width=20> - Pink chain visualizes current path found by the algorithm.
