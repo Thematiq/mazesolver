@@ -107,7 +107,11 @@ public class WindowController implements Initializable {
     @FXML
     private void stopSolver() {
         this.solvingAnimation.stop();
+        do {
+            this.lastSolved = this.solver.nextStep();
+        } while(lastSolved != null && !lastSolved.equals(this.endPos));
         this.semaphoreAction(false);
+        this.drawSolver();
     }
 
     @FXML
@@ -188,7 +192,7 @@ public class WindowController implements Initializable {
 
     private void nextStep() {
         this.lastSolved = this.solver.nextStep();
-        if (this.lastSolved.equals(this.endPos)) {
+        if (this.lastSolved == null || this.lastSolved.equals(this.endPos) ) {
             this.solvingAnimation.stop();
             this.semaphoreAction(false);
         }
@@ -237,7 +241,7 @@ public class WindowController implements Initializable {
     }
 
     private void initDrawer() {
-        this.cellSize = (int) Math.min(this.boardCanvas.getHeight(), this.boardCanvas.getWidth()) / Math.max(this.width, this.height);
+        this.cellSize = (int) Math.min(this.boardCanvas.getHeight() / this.height, this.boardCanvas.getWidth() / this.width);
         this.boardCanvas.setWidth(this.cellSize * this.width);
         this.boardCanvas.setHeight(this.cellSize * this.height);
     }
